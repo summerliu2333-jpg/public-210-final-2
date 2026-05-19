@@ -30,5 +30,26 @@ int main() {
         cout << entry.name << " - " << entry.order << endl;
     }
 
+    //M2
+    for (int round = 1; round <= 10; round++) {
+        cout << "--- Round " << round << " ---" << endl;
+ 
+        if (!coffeeQueue.empty()) {
+            cout << "[Coffee] Served: " << coffeeQueue.front().name << " (" << coffeeQueue.front().order << ")" << endl;
+            coffeeQueue.pop_front();
+        } else {
+            cout << "[Coffee] Queue empty, no one served." << endl;
+        }
+        if (rand() % 2 == 0) {
+            Customer c;
+            c.name = names[rand() % 10];
+            c.order = coffees[rand() % 5];
+            coffeeQueue.push_back(c);
+            cout << "[Coffee] " << c.name << " joined the queue." << endl;
+        }
+ 
+        cout << endl;
+    }
+
     return 0;
 }
