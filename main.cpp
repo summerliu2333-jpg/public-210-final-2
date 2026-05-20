@@ -1,3 +1,4 @@
+//COMSC-210-5068, Final-2, Yang Liu
 #include <iostream>
 #include <list>
 #include <string>
@@ -32,10 +33,6 @@ int main() {
         coffeeQueue.push_back(c);
     }
  
-    for (auto entry : coffeeQueue) {
-        cout << entry.name << " - " << entry.order << endl;
-    }
-
     // M3
     deque<Customer> muffinQueue;
     for (int i = 0; i < 3; i++) {
@@ -63,6 +60,28 @@ int main() {
     snackIn.push(init1);
     snackIn.push(init2);
     snackIn.push(init3);
+
+    //M6: display initial customers for all booths
+    cout << "Initial coffee queue:" << endl;
+    for (auto entry : coffeeQueue) {
+        cout << entry.name << " - " << entry.order << endl;
+    }
+    cout << endl;
+    cout << "Initial muffin queue:" << endl;
+    for (auto entry : muffinQueue) {
+        cout << entry.name << " - " << entry.order << endl;
+    }
+    cout << endl;
+    cout << "Initial bracelet queue:" << endl;
+    for (auto entry : braceletQueue) {
+        cout << entry.name << " - " << entry.order << endl;
+    }
+    cout << endl;
+    cout << "Initial snack queue:" << endl;
+    cout << init1.name << " - " << init1.order << endl;
+    cout << init2.name << " - " << init2.order << endl;
+    cout << init3.name << " - " << init3.order << endl;
+    cout << endl;
  
 
     //M2
