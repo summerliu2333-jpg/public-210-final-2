@@ -5,6 +5,7 @@
 #include <ctime>
 #include <deque>
 #include <vector>
+#include <stack>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ int main() {
     string coffees[] = {"Iced Latte", "Black Coffee", "Flat White", "Vanilla Latte", "Cold Brew"};
     string muffins[] = {"Blueberry Muffin", "Double Choc", "Poppyseed", "Bran Muffin", "Carrot Muffin"};
     string bracelets[] = {"Blue Beaded", "Knotted Hemp", "Gold Charm", "Friendship Knot", "Shell Bracelet"};
+    string snacks[] = {"Soft Pretzel", "Trail Mix", "Kettle Chips", "Oatmeal Cookie", "Apple Slices"};
  
     //M1
     list<Customer> coffeeQueue;
@@ -51,6 +53,16 @@ int main() {
         c.order = bracelets[rand() % 5];
         braceletQueue.push_back(c);
     }
+
+    // M5: I chose to use two stacks to implement a queue FIFO
+    stack<Customer> snackIn, snackOut;
+    Customer init1, init2, init3;
+    init1.name = names[rand() % 10]; init1.order = snacks[rand() % 5];
+    init2.name = names[rand() % 10]; init2.order = snacks[rand() % 5];
+    init3.name = names[rand() % 10]; init3.order = snacks[rand() % 5];
+    snackIn.push(init1);
+    snackIn.push(init2);
+    snackIn.push(init3);
  
 
     //M2
@@ -99,6 +111,27 @@ int main() {
             c.order = bracelets[rand() % 5];
             braceletQueue.push_back(c);
             cout << "[Bracelet] " << c.name << " joined the queue." << endl;
+        }
+
+        // M5
+        if (snackOut.empty()) {
+            while (!snackIn.empty()) {
+                snackOut.push(snackIn.top());
+                snackIn.pop();
+            }
+        }
+        if (!snackOut.empty()) {
+            cout << "[Snack] Served: " << snackOut.top().name << " (" << snackOut.top().order << ")" << endl;
+            snackOut.pop();
+        } else {
+            cout << "[Snack] Queue empty, no one served." << endl;
+        }
+        if (rand() % 2 == 0) {
+            Customer c;
+            c.name = names[rand() % 10];
+            c.order = snacks[rand() % 5];
+            snackIn.push(c);
+            cout << "[Snack] " << c.name << " joined the queue." << endl;
         }
  
         cout << endl;
