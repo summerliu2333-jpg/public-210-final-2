@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <deque>
+#include <vector>
 
 using namespace std;
 
@@ -18,6 +19,7 @@ int main() {
     string names[] = {"Jake", "Mia", "Tyler", "Sara", "Nate", "Chloe", "Marcus", "Lily", "Derek", "Amy"};
     string coffees[] = {"Iced Latte", "Black Coffee", "Flat White", "Vanilla Latte", "Cold Brew"};
     string muffins[] = {"Blueberry Muffin", "Double Choc", "Poppyseed", "Bran Muffin", "Carrot Muffin"};
+    string bracelets[] = {"Blue Beaded", "Knotted Hemp", "Gold Charm", "Friendship Knot", "Shell Bracelet"};
  
     //M1
     list<Customer> coffeeQueue;
@@ -39,6 +41,15 @@ int main() {
         c.name = names[rand() % 10];
         c.order = muffins[rand() % 5];
         muffinQueue.push_back(c);
+    }
+
+    // M4
+    vector<Customer> braceletQueue;
+    for (int i = 0; i < 3; i++) {
+        Customer c;
+        c.name = names[rand() % 10];
+        c.order = bracelets[rand() % 5];
+        braceletQueue.push_back(c);
     }
  
 
@@ -73,6 +84,21 @@ int main() {
             c.order = muffins[rand() % 5];
             muffinQueue.push_back(c);
             cout << "[Muffin] " << c.name << " joined the queue." << endl;
+        }
+
+        // M4
+        if (!braceletQueue.empty()) {
+            cout << "[Bracelet] Served: " << braceletQueue.front().name << " (" << braceletQueue.front().order << ")" << endl;
+            braceletQueue.erase(braceletQueue.begin());
+        } else {
+            cout << "[Bracelet] Queue empty, no one served." << endl;
+        }
+        if (rand() % 2 == 0) {
+            Customer c;
+            c.name = names[rand() % 10];
+            c.order = bracelets[rand() % 5];
+            braceletQueue.push_back(c);
+            cout << "[Bracelet] " << c.name << " joined the queue." << endl;
         }
  
         cout << endl;
