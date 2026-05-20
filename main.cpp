@@ -3,6 +3,7 @@
 #include <string>
 #include <cstdlib>
 #include <ctime>
+#include <deque>
 
 using namespace std;
 
@@ -16,6 +17,7 @@ int main() {
  
     string names[] = {"Jake", "Mia", "Tyler", "Sara", "Nate", "Chloe", "Marcus", "Lily", "Derek", "Amy"};
     string coffees[] = {"Iced Latte", "Black Coffee", "Flat White", "Vanilla Latte", "Cold Brew"};
+    string muffins[] = {"Blueberry Muffin", "Double Choc", "Poppyseed", "Bran Muffin", "Carrot Muffin"};
  
     //M1
     list<Customer> coffeeQueue;
@@ -29,6 +31,16 @@ int main() {
     for (auto entry : coffeeQueue) {
         cout << entry.name << " - " << entry.order << endl;
     }
+
+    // M3
+    deque<Customer> muffinQueue;
+    for (int i = 0; i < 3; i++) {
+        Customer c;
+        c.name = names[rand() % 10];
+        c.order = muffins[rand() % 5];
+        muffinQueue.push_back(c);
+    }
+ 
 
     //M2
     for (int round = 1; round <= 10; round++) {
@@ -46,6 +58,21 @@ int main() {
             c.order = coffees[rand() % 5];
             coffeeQueue.push_back(c);
             cout << "[Coffee] " << c.name << " joined the queue." << endl;
+        }
+ 
+        // M3
+        if (!muffinQueue.empty()) {
+            cout << "[Muffin] Served: " << muffinQueue.front().name << " (" << muffinQueue.front().order << ")" << endl;
+            muffinQueue.pop_front();
+        } else {
+            cout << "[Muffin] Queue empty, no one served." << endl;
+        }
+        if (rand() % 2 == 0) {
+            Customer c;
+            c.name = names[rand() % 10];
+            c.order = muffins[rand() % 5];
+            muffinQueue.push_back(c);
+            cout << "[Muffin] " << c.name << " joined the queue." << endl;
         }
  
         cout << endl;
